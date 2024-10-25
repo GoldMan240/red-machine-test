@@ -1,7 +1,6 @@
 using Camera;
 using UnityEngine;
 
-
 namespace Connection
 {
     public class ColorConnector : MonoBehaviour
