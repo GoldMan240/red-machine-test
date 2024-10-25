@@ -1,6 +1,5 @@
 using Utils.Singleton;
 
-
 namespace Player
 {
     public class PlayerController : DontDestroyMonoBehaviour

@@ -3,7 +3,6 @@ using Camera;
 using UnityEngine;
 using Utils.Singleton;
 
-
 namespace Player.ActionHandlers
 {
     public class ClickHandler : DontDestroyMonoBehaviourSingleton<ClickHandler>
@@ -15,13 +14,13 @@ namespace Player.ActionHandlers
         public event Action<Vector3> PointerUpEvent;
         public event Action<Vector3> DragStartEvent;
         public event Action<Vector3> DragEndEvent;
+        public event Action<Vector3> DragPositionEvent;
 
         private Vector3 _pointerDownPosition;
 
         private bool _isClick;
         private bool _isDrag;
         private float _clickHoldDuration;
-
 
         private void Update()
         {
@@ -55,6 +54,11 @@ namespace Player.ActionHandlers
 
                 _isClick = false;
             }
+            
+            if (_isDrag)
+            {
+                DragPositionEvent?.Invoke(CameraHolder.Instance.MainCamera.ScreenToWorldPoint(Input.mousePosition));
+            }
         }
 
         private void LateUpdate()
@@ -70,20 +74,6 @@ namespace Player.ActionHandlers
                 _isClick = false;
                 _isDrag = true;
             }
-        }
-
-        public void SetDragEventHandlers(Action<Vector3> dragStartEvent, Action<Vector3> dragEndEvent)
-        {
-            ClearEvents();
-
-            DragStartEvent = dragStartEvent;
-            DragEndEvent = dragEndEvent;
-        }
-
-        public void ClearEvents()
-        {
-            DragStartEvent = null;
-            DragEndEvent = null;
         }
     }
 }

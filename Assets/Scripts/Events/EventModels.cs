@@ -1,5 +1,3 @@
-using UnityEngine;
-
 namespace Events
 {
     public static class EventModels
@@ -7,6 +5,11 @@ namespace Events
         public static class Game
         {
             public struct NodeTapped : IEvent
+            {
+                
+            }
+            
+            public struct NothingTapped : IEvent
             {
                 
             }
